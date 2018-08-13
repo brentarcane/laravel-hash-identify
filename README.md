@@ -14,27 +14,37 @@ PHP 7 and Laravel 5.5 or higher.
 
 You can install the package via composer:
 
-```php
-composer require brentkozjak/laravel-hash-identify
+```
+composer require "brentkozjak/laravel-hash-identify":"^1.0.0"
 ```
 
 The package the the facade will be autodiscovered by Laravel.
 
 ## Usage
 
-Using the `Hash` facade:
+This package extends Laravel's `HashManager` class, allowing you to use the default `Hash` facade like so:
 
 ```php
-$string = 'b3b24027c676f8d2cdfa5e2ea8bc1cc7';
-$hashTypes = \Hash::identify($string);
+// Create a hash using Laravel's default Hash::make() method.
+$hash = \Hash::make('example');
 
-var_dump($hashTypes);
+// Identify the possible hashing algorithm(s) used to create $hash
+$hash_modes = \Hash::identify($hash);
+
+// $hash_modes is an instance of a standard Laravel Collection
+$hash_modes->pluck('name');
+$hash_modes->toArray();
+...
 ```
+
+## A note on performance
+
+This package unavoidably uses a lot of `preg_match` regular expressions to match a hashing algorithm.  While I have found performance to be quite acceptable, I am of course open to further optimisations.
 
 ## Todo
 
 Tests!
 
-### License
+## License
 
 This project is open-sourced software licensed under the [GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl-3.0.en.html)
