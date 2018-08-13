@@ -18,7 +18,7 @@ You can install the package via composer:
 composer require "brentkozjak/laravel-hash-identify":"~1.0.0"
 ```
 
-The package the the facade will be autodiscovered by Laravel.
+The package and the facade will be autodiscovered by Laravel.
 
 ## Usage
 
